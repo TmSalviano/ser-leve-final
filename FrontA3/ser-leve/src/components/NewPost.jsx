@@ -9,7 +9,7 @@ function NewPost({ setPosts, setCurrentTime }) {
   const textareaRef = useRef(undefined);
 
   return (
-    <div className="bg-white rounded-lg p-2 flex flex-col">
+    <div className="bg-white rounded-lg p-2 flex flex-col gap-2">
       <div className="flex items-start w-full flex-grow">
         {/*Add: More structured Post Model: with title, description, image, etc.*/}
         <textarea
@@ -21,7 +21,6 @@ function NewPost({ setPosts, setCurrentTime }) {
           className="w-full outline-none px-2 resize-none py-2 overflow-hidden flex-grow"
           onChange={(e) => handleText(e, setPostText, textareaRef)}
         />
-
         {/*Post Button*/}
         <button
           className="font-bold bg-green-500 px-7 py-2 rounded-lg text-white text-sm hover:bg-green-600 transition-all"
@@ -42,7 +41,8 @@ function NewPost({ setPosts, setCurrentTime }) {
         </button>
       </div>
       {/*Fix: Make the Photo label stay at the bottom when a photo is added*/}
-      <div className="photo-label-div">
+        {image && <img src={image} className="h-36 p-2 w-full self-center object-contain" />}
+      <div className="photo-label-div mt-auto">
         <label
           htmlFor="image-upload"
           className="inline-flex gap-1 items-center cursor-pointer hover:text-gray-500 transition-all"
@@ -60,7 +60,6 @@ function NewPost({ setPosts, setCurrentTime }) {
         />
       </div>
 
-      {image && <img src={image} className="h-36 p-2" />}
     </div>
   );
 }

@@ -11,6 +11,9 @@ import NewPost from "./NewPost";
 import { currentUser } from "../data/currentUser";
 import { deletePost } from "../utils/NewPostUtils";
 
+//./Main/
+import ReceitaCard from "./Main/ReceitaCard";
+
 function Main() {
   const [posts, setPosts] = useState(Posts);
   const [currentTime, setCurrentTime] = useState(Date.now());
@@ -31,7 +34,7 @@ function Main() {
        Add: A better defined post card like structure with better defined sections for Title, Description, Resume, Image.
     */}
       {posts.map(({ id, name, photo, time, content }, i) => (
-        <div key={i} className="bg-white p-2 rounded-lg">
+        <div key={i} className="bg-white p-2 rounded-lg flex flex-col">
           {/*Username, Profile Pic, Post's time, delete post button*/}
           <header className="flex justify-between">
             <div className="flex gap-2">
@@ -55,14 +58,14 @@ function Main() {
           </header>
 
           {/*This is the post itself: the text an the image*/}
-          <div>
+          <div className="flex flex-col justify-content-center items-center">
             {content.text.split("\n").map((text, i) => (
-              <p key={i} className="text-lg mb-2">
+              <p key={i} className="text-lg mb-2 self-start">
                 {text}
               </p>
             ))}
 
-            <img src={content.img} />
+            <img src={content.img} className="flex-grow-0" />
           </div>
 
           {/*Liking the comment +  complex functionality -> commenting and sharing.*/}

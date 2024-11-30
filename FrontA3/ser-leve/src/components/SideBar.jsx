@@ -43,11 +43,10 @@ import {
     },
   ];
  
-  //Fix: The sidebar should stay fixed in place as you navigate through the post feed
   function Sidebar() {
     const path = window.location.pathname;
     return (
-      <div className="w-full sm:w-auto fixed bottom-0 left-0 space-y-4 lg:w-1/4 sm:static">
+      <div className="w-full sm:w-auto bottom-0 left-0 space-y-4 lg:w-1/4 sm:static">
         <div className="hidden rounded-lg p-4 sm:flex gap-2">
           <img src={currentUser.photo} className="w-12 rounded-full" />
           <div className="leading-snug">
