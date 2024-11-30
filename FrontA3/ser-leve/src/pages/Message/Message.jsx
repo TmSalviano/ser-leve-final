@@ -1,4 +1,4 @@
-import Nav from '../../components/nav';
+import Nav from '../../components/Nav';
 import Sidebar from '../../components/SideBar';
 
 const Messages = () => {
@@ -28,16 +28,7 @@ const Messages = () => {
   ];
 
   return (
-    <div className="bg-[#dcd9e1] min-h-screen pb-10">
-      {/* Barra de navegação */}
-      <Nav />
-
-      <div className="grid md:flex gap-6 max-w-7xl p-4 ">
-        {/* Barra lateral */}
-        <Sidebar />
-
-        {/* Conteúdo principal - Mensagens */}
-        <div className="flex-1 p-6 bg-white rounded-lg shadow-md">
+        <div className="flex-1 p-6 bg-white rounded-lg shadow-md h-full">
           <h2 className="text-2xl font-bold mb-4 text-green-600">Mensagens</h2>
           <ul>
             {messages.map((message) => (
@@ -61,8 +52,6 @@ const Messages = () => {
             ))}
           </ul>
         </div>
-      </div>
-    </div>
   );
 };
 

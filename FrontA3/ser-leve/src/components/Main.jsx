@@ -24,7 +24,7 @@ function Main() {
   }, []);
 
   return (
-    <main className="lg:w-3/4 rounded-lg space-y-4">
+    <main className="lg:w-3/4 rounded-lg space-y-4 flex flex-col flex-grow">
       <NewPost setPosts={setPosts} setCurrentTime={setCurrentTime} />
 
     {/*This defines the skeleton of the posts when posted 
@@ -74,8 +74,10 @@ function Main() {
             <ShareIcon className="size-5 cursor-pointer hover:text-gray-500 transition-all" />
           </footer>
         </div>
-      ))}
-    </main>
+      )
+    )
+  }
+  </main>
   );
 }
 

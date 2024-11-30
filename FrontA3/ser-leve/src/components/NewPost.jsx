@@ -9,8 +9,8 @@ function NewPost({ setPosts, setCurrentTime }) {
   const textareaRef = useRef(undefined);
 
   return (
-    <div className="bg-white rounded-lg p-2">
-      <div className="flex items-start">
+    <div className="bg-white rounded-lg p-2 flex flex-col">
+      <div className="flex items-start w-full flex-grow">
         {/*Add: More structured Post Model: with title, description, image, etc.*/}
         <textarea
           ref={textareaRef}
@@ -18,7 +18,7 @@ function NewPost({ setPosts, setCurrentTime }) {
           rows={1}
           value={postText}
           placeholder="What's in your mind?"
-          className="w-full outline-none px-2 resize-none py-2 overflow-hidden"
+          className="w-full outline-none px-2 resize-none py-2 overflow-hidden flex-grow"
           onChange={(e) => handleText(e, setPostText, textareaRef)}
         />
 

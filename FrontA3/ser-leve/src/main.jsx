@@ -9,10 +9,13 @@ import Notifications from './pages/Notifications/Notifications.jsx'
 import Settings from './pages/Settings/Settings.jsx'
 import Register from './pages/Register/Register.jsx'
 import Message from './pages/Message/Message.jsx'
+import Layout from './components/template/Layout.jsx'
+import HomeLayout from './components/template/HomeLayout.jsx'
 
 
 
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
+import { Main } from 'next/document.js'
 
 
 const router  = createBrowserRouter([{
@@ -21,32 +24,32 @@ const router  = createBrowserRouter([{
     children: [
         {
             path: "/Home",
-            element: <Home/>
-        },
-        {
-            path: "/Login",
-            element: <Login/>
+            element: <HomeLayout><Home /></HomeLayout>
         },
         {
             path: "/Explore",
-            element: <Explore/>
+            element: <Layout> <Explore/> </Layout> 
         },
         {
           path: "Notifications",
-          element: <Notifications/>
+          element: <Layout> <Notifications/> </Layout>
         },
         {
           path: "Settings",
-          element: <Settings/>
+          element: <Layout><Settings/></Layout>
+        },
+        {
+          path: "Message",
+          element: <Layout> <Message/> </Layout>
         },
         {
           path: "Register",
           element: <Register/>
         },
         {
-          path: "Message",
-          element: <Message/>
-        }
+          path: "/Login",
+          element: <Login/>
+        },
        
         ]
 }
