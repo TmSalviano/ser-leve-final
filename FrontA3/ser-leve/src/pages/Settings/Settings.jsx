@@ -79,14 +79,14 @@ const Settings = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block font-bold text-gray-700">
-              Email:
+            <label htmlFor="nametag" className="block font-bold text-gray-700">
+              NameTag:
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={profileData.email}
+              type="nametag"
+              id="nametag"
+              name="nametag"
+              value="@Isa" //this line is not correct
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-md"
               required
