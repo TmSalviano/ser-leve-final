@@ -42,10 +42,10 @@ import { useLoggedUser } from "../contexts/LoggedUserProvider";
   function Sidebar() {
     const path = window.location.pathname;
     const { loggedInUser, setUser } = useLoggedUser(); // Access context here
+    const { Id, NameTag, Nome, ProfilePicture } = loggedInUser || {};  // Destructure only the 'Id' property !!!Case Sensitive
   
     const handleLogout = async () => {
 
-      const { Id } = loggedInUser || {};  // Destructure only the 'Id' property !!!Case Sensitive
       console.log(Id);
         try {
           // Make a GET request to the backend to log out
@@ -75,12 +75,19 @@ import { useLoggedUser } from "../contexts/LoggedUserProvider";
     return (
       <div className=" w-full sm:w-auto bottom-0 left-0  lg:w-1/4 sm:static ">
         <div className="hidden rounded-lg p-4 sm:flex gap-2 space-y-4">
-          <img src={currentUser.photo} className="w-12 rounded-full" />
-          <div className="leading-snug">
-            <p className="font-semibold">{currentUser.name}</p>
-            <p className="text-gray-400">{currentUser.username}</p>
-          </div>
+        {/* Conditionally display photo or a black circle with "undefined" */}
+        {ProfilePicture ? (
+          <img src={ProfilePicture} className="w-12 rounded-full" alt="Profile" />
+        ) : (
+          <img src={currentUser.photo} className="w-12 rounded-full" alt="DefaultProfile" />
+        )}
+
+        <div className="leading-snug">
+          {/* Conditionally display name, or leave it empty */}
+          <p className="font-semibold">{Nome || "Name Undefined"}</p>
+          <p className="text-gray-400">{NameTag}</p> {/*NameTag is require so no problem here */}
         </div>
+      </div>
   
         <div className="gap-1 flex justify-between sm:flex-col shadow  shadow-black sm:shadow-none text-xl overflow-hidden">
           {menu.map(({ text, href, icon }, i) => (
