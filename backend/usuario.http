@@ -1,10 +1,12 @@
+// CRUD EndPoints
+
 GET http://localhost:3000/teste/hello
 ###
 GET http://localhost:3000/teste/
 ###
 POST http://localhost:3000/api/usuario/
 Content-Type: application/json
-
+ 
 {
     "Nome": "Tiago Salviano",
     "NameTag": "@TiagoMS",
@@ -18,13 +20,10 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/usuario/1
-
 ###
 GET http://localhost:3000/api/usuario
-
 ###
-DELETE http://localhost:3000/api/usuario/1
-
+DELETE http://localhost:3000/api/usuario/2
 ###
 PATCH  http://localhost:3000/api/usuario/2 
 Content-Type: application/json
@@ -33,3 +32,34 @@ Content-Type: application/json
     "Nome": "Tiago Miranda Salviano",
     "NameTag": "@TiagoMirandaS"
 }
+###
+
+// Auth Endpoints
+
+POST http://localhost:3000/api/usuario/auth/reg
+Content-Type: application/json
+
+{
+    "NameTag": "@TiagoMS",
+    "Email": "tiago@example.com",
+    "Password": "tiagotiago"
+}
+###
+
+POST http://localhost:3000/api/usuario/auth/login
+Content-Type: application/json
+
+{
+    "Email": "tiago@example.com",
+    "Password": "tiagotiago"
+}
+###
+
+GET http://localhost:3000/api/usuario/auth/logout/3
+###
+
+
+// LoggedIn User Enpoints
+
+GET http://localhost:3000/api/usuario/loggedIn/3
+###

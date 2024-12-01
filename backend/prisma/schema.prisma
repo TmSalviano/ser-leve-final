@@ -12,12 +12,15 @@ datasource db {
 
 model Usuario {
   Id Int @id @default(autoincrement())
-  Nome String
+  Nome String?
   NameTag String @unique
   Email String @unique
   Password String
-  ProfilePicture String
-  Biografy String
-  Following String
+  ProfilePicture String?
+  Biografy String?
+  Following String? 
+  DarkMode Boolean @default(false)
+  IsLoggedIn Boolean @default(false)
+  
 }
 

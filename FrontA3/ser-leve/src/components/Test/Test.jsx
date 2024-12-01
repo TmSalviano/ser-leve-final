@@ -11,7 +11,7 @@ export default function Teste() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
+        }, 
       });
 
       // If the response is not OK, throw an error
@@ -51,4 +51,7 @@ export default function Teste() {
       </div>
     </div>
   );
+
+
+  
 }
