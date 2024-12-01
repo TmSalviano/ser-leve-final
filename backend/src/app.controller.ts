@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 
 @Controller("teste")
 export class AppController {
+  //This is the constructor injecting the service.
   constructor(private readonly appService: AppService) {}
 
   @Get("hello")
