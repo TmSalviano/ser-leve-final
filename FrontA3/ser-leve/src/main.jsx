@@ -14,6 +14,7 @@ import HomeLayout from './components/template/HomeLayout.jsx';
 import Test from './components/Test/Test.jsx';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { LoggedUserProvider } from './contexts/LoggedUserContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-     <RouterProvider router={router} />
+    <LoggedUserProvider>
+      <RouterProvider router={router} />
+    </LoggedUserProvider>
   </StrictMode>
 );
