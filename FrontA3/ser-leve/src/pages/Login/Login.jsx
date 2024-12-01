@@ -1,8 +1,11 @@
   import React, { useState } from 'react';
   import { useNavigate } from 'react-router-dom';
-  import { useLoggedUser } from '../../contexts/LoggedUserContext';
+  import { useLoggedUser } from '../../contexts/LoggedUserProvider'; // Correct path
+
 
   const Login = () => {
+    
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState(''); // To display messages from the server

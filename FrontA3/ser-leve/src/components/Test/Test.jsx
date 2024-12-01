@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoggedUser } from '../../contexts/LoggedUserContext'; // Import the context hook
+import { useLoggedUser } from '..//../contexts/LoggedUserProvider'; // Correct path
 
 const Teste = () => {
   const { loggedInUser } = useLoggedUser(); // Access logged-in user info from context

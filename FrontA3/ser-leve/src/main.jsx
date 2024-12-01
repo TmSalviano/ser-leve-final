@@ -13,8 +13,8 @@ import Layout from './components/template/Layout.jsx';
 import HomeLayout from './components/template/HomeLayout.jsx';
 import Test from './components/Test/Test.jsx';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { LoggedUserProvider } from './contexts/LoggedUserContext.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { LoggedUserProvider } from './contexts/LoggedUserProvider.jsx';
 
 const router = createBrowserRouter([
   {
