@@ -59,7 +59,7 @@ export class UsuarioRepository {
             });
         } catch (error) {
             console.error('Error fetching logged-in user:', error); 
-            return { error: 'User not found or not logged in' };
+            return { message: 'User not found or not logged in' };
         }
     }
     
@@ -114,6 +114,35 @@ export class UsuarioRepository {
         return this.prismaService.usuario.create({
             data: usuario as any,
         })
+    }
+
+    async editProfile(Id: number, Nome: string, NameTag: string, ProfilePicture: string, Biografy: string, DarkMode: boolean) {
+        try {
+            const user = await this.prismaService.usuario.findFirstOrThrow({
+                where: {
+                    Id,
+                    IsLoggedIn: true,
+                }
+            }); //this is just to check if the user is logged in
+
+            const updatedUser = await this.prismaService.usuario.update({
+                where: {
+                  Id,
+                },
+                data: {
+                  Nome,
+                  NameTag,
+                  ProfilePicture,
+                  Biografy,
+                  DarkMode, // You can store DarkMode as a boolean or string, depending on your DB schema
+                },
+              });
+
+        } catch (error) {
+            console.error('Error fetching logged-in user:', error); 
+            return { message: 'User not found or not logged in' };
+        }
+
     }
 
 }

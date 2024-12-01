@@ -71,5 +71,15 @@ export class UsuarioController {
         return this.repo.getLoggedIn(+Id);
     }
 
+    //Update LoggedInUser endpoints
+    @Post('/editProfile/:id')
+    async editProfile(
+      @Param('id') Id: string,  @Body() body: { Nome: string; NameTag: string; ProfilePicture: string; Biografy: string; DarkMode: boolean; }
+    ) {
+      const { Nome, NameTag, ProfilePicture, Biografy, DarkMode } = body;
+      // Convert the Id to a number, as it's typically a number in your database
+      return this.repo.editProfile(+Id, Nome, NameTag, ProfilePicture, Biografy, DarkMode);
+    }
+
 
 }

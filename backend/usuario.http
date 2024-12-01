@@ -50,8 +50,8 @@ POST http://localhost:3000/api/usuario/auth/login
 Content-Type: application/json
 
 {
-    "Email": "tiago@example.com",
-    "Password": "tiagotiago"
+    "Email": "laranja@example.com",
+    "Password": "laranja"
 }
 ###
 
@@ -62,4 +62,19 @@ GET http://localhost:3000/api/usuario/auth/logout/6
 // LoggedIn User Enpoints
 
 GET http://localhost:3000/api/usuario/loggedIn/3
+###
+
+// Edit Profile Endpoints
+
+POST http://localhost:3000/api/usuario/editProfile/6
+Content-Type: application/json
+
+{
+    "Nome": "Limoeiro",
+    "NameTag": "@MeuLimao",
+    "ProfilePicture": "limao.jpg",
+    "Biografy": "Meu Limao Meu limoeiro meuy pe. Meu pe de maracanga",
+    "DarkMode": true
+}
+
 ###
