@@ -1,3 +1,35 @@
 GET http://localhost:3000/teste/hello
 ###
 GET http://localhost:3000/teste/
+###
+POST http://localhost:3000/usuario/
+Content-Type: application/json
+
+{
+    "Nome": "Tiago Salviano",
+    "NameTag": "@TiagoMS",
+    "Email": "tiago@example.com",
+    "Password": "tiagotiago",
+    "ProfilePicture": "link-to-a-pic",
+    "Biografy": "Maybe you just have some bird ideas",
+    "Following": "isadora@example.com"
+}
+
+
+###
+GET http://localhost:3000/usuario/1
+
+###
+GET http://localhost:3000/usuario
+
+###
+DELETE http://localhost:3000/usuario/1
+
+###
+PATCH  http://localhost:3000/usuario/2 
+Content-Type: application/json
+
+{
+    "Nome": "Tiago Miranda Salviano",
+    "NameTag": "@TiagoMirandaS"
+}
