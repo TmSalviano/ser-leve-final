@@ -17,10 +17,10 @@ function Nav() {
       //fix: uncentered flex items
       //The link needs to change from Login to Home when logged in
       <nav className="bg-green-500 flex items-center justify-start gap-5 p-2 ">
-        <img src="Logotipo marca nutricionista veganismo saúde maçã verde_processed (1).png" alt="Logo" className="h-10 object-contain " />
-        <h1 className="font-bold text-gray-800 text-2xl">SerLeve</h1>
-          <Link to={userDestination()} className="ml-auto flex  font-bold text-gray-800 bg-green-500 py-2 px-3 rounded-full hover:bg-gray-700">Login</Link>
-
+        <Link to="/Home" className="flex items-center justify-start gap-5">
+          <img src="Logotipo marca nutricionista veganismo saúde maçã verde_processed (1).png" alt="Logo" className="h-10 object-contain " />
+          <h1 className="font-bold text-gray-800 text-2xl">SerLeve</h1>
+        </Link>
       </nav>
     );
   }

@@ -19,7 +19,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/api/usuario/1
+GET http://localhost:3000/api/usuario/3
 ###
 GET http://localhost:3000/api/usuario
 ###
@@ -55,7 +55,7 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:3000/api/usuario/auth/logout/3
+GET http://localhost:3000/api/usuario/auth/logout/6
 ###
 
 
