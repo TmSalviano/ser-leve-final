@@ -15,6 +15,7 @@ import Test from './components/Test/Test.jsx';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { LoggedUserProvider } from './contexts/LoggedUserProvider.jsx';
+import ProtectedRoute from './auth/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,23 +24,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/Home",
-        element: <HomeLayout><Home /></HomeLayout>
+        element: <ProtectedRoute><HomeLayout><Home /></HomeLayout></ProtectedRoute> 
       },
       {
         path: "/Explore",
-        element: <Layout><Explore /></Layout>
+        element: <ProtectedRoute><Layout><Explore /></Layout></ProtectedRoute>
       },
       {
         path: "/Notifications", // Fixed path
-        element: <Layout><Notifications /></Layout>
+        element: <ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>
       },
       {
         path: "/Settings", // Fixed path
-        element: <Layout><Settings /></Layout>
+        element: <ProtectedRoute><Layout><Settings /></Layout></ProtectedRoute>
       },
       {
         path: "/Message", // Fixed path
-        element: <Layout><Message /></Layout>
+        element:  <ProtectedRoute><Layout><Message /></Layout></ProtectedRoute>
       },
       {
         path: "/Register", // Fixed path

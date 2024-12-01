@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const LoggedUserContext = createContext();
 
@@ -7,20 +7,21 @@ export const useLoggedUser = () => {
 };
 
 export const LoggedUserProvider = ({ children }) => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-
-  useEffect(() => {
-    // Load user from sessionStorage on page load
+  // Initialize state directly from sessionStorage
+  const [loggedInUser, setLoggedInUser] = useState(() => {
     const savedUser = sessionStorage.getItem('loggedInUser');
-    if (savedUser) {
-      setLoggedInUser(JSON.parse(savedUser)); // Parse and set the user from sessionStorage
-    }
-  }, []);
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
   const setUser = (user) => {
     setLoggedInUser(user);
-    // Store user in sessionStorage
-    sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+    if (user) {
+      // Store user in sessionStorage if not null
+      sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+    } else {
+      // Clear sessionStorage if user is null
+      sessionStorage.removeItem('loggedInUser');
+    }
   };
 
   return (
