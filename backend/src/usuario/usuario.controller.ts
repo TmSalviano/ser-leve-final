@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import Usuario from './entities/usuario.entity';
 import { UsuarioRepository } from './usuario.repository';
 
-@Controller('usuario')
+@Controller('/api/usuario')
 export class UsuarioController {
     constructor(private repo: UsuarioRepository) {}
 

@@ -2,7 +2,7 @@ GET http://localhost:3000/teste/hello
 ###
 GET http://localhost:3000/teste/
 ###
-POST http://localhost:3000/usuario/
+POST http://localhost:3000/api/usuario/
 Content-Type: application/json
 
 {
@@ -17,16 +17,16 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/usuario/1
+GET http://localhost:3000/api/usuario/1
 
 ###
-GET http://localhost:3000/usuario
+GET http://localhost:3000/api/usuario
 
 ###
-DELETE http://localhost:3000/usuario/1
+DELETE http://localhost:3000/api/usuario/1
 
 ###
-PATCH  http://localhost:3000/usuario/2 
+PATCH  http://localhost:3000/api/usuario/2 
 Content-Type: application/json
 
 {

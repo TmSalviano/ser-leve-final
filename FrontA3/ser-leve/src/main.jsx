@@ -11,11 +11,10 @@ import Register from './pages/Register/Register.jsx'
 import Message from './pages/Message/Message.jsx'
 import Layout from './components/template/Layout.jsx'
 import HomeLayout from './components/template/HomeLayout.jsx'
-
+import Test from './components/Test/Test.jsx'
 
 
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
-import { Main } from 'next/document.js'
 
 
 const router  = createBrowserRouter([{
@@ -49,6 +48,10 @@ const router  = createBrowserRouter([{
         {
           path: "/Login",
           element: <Login/>
+        },
+        {
+          path: "/Teste",
+          element: <Layout><Test /></Layout>
         },
        
         ]

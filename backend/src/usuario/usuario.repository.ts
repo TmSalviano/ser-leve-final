@@ -7,9 +7,7 @@ import Usuario from './entities/usuario.entity';
 @Injectable() //Everything that has this annotation can be injected into the controller
 export class UsuarioRepository {
     //PrismaService is accesible because usuario depends on dev-db module and PrismaService is visible/exported from db-dev module
-    constructor(private prismaService: PrismaService) {
-
-    }
+    constructor(private prismaService: PrismaService) {}
 
     async findAll() {
         return this.prismaService.usuario.findMany(); //goes to prismaService in db-dev module then goes to usuario schema and call prisma methods in that schema
