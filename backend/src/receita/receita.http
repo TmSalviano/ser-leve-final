@@ -1,0 +1,65 @@
+### Post tiago@exaple.com receita
+POST http://localhost:3000/receita
+Content-Type: application/json
+
+{
+  "usuarioId": 3, 
+  "titulo": "Delicious Pizza",
+  "resumo": "A simple pizza recipe",
+  "descricao": "A detailed description of a delicious pizza recipe.",
+  "imagem": "pizza.jpg"
+}
+###
+
+### Post isa@exaple.com receita
+POST http://localhost:3000/receita
+Content-Type: application/json
+
+{
+  "usuarioId": 5, 
+  "titulo": "Delicious lettuce",
+  "resumo": "A simple lettuce recipe",
+  "descricao": "A detailed description of a delicious lettuce recipe.",
+  "imagem": "lettuce.jpg"
+}
+###
+
+
+
+### Get a receita by its ID
+GET http://localhost:3000/receita/1
+
+###
+
+### Get all receitas for a specific UsuarioId (tiago@example.com)
+GET http://localhost:3000/receita/usuario/3
+
+###
+GET http://localhost:3000/receita/usuario/5
+###
+
+### Update a receita by its ID
+PUT http://localhost:3000/receita/1
+Content-Type: application/json
+
+{
+  "titulo": "Updated Pizza",
+  "resumo": "An updated pizza recipe",
+  "descricao": "A detailed description of an updated pizza recipe.",
+  "imagem": "updated_pizza.jpg"
+}
+
+###
+
+### Delete a receita by its ID
+DELETE http://localhost:3000/receita/3
+
+###
+
+### Get the main feed for an array of UsuarioIds
+POST http://localhost:3000/receita/main-feed
+Content-Type: application/json
+
+[3, 4, 5, 6]
+
+###
