@@ -1,63 +1,47 @@
-# 1. Create a "Postou" notification
-POST http://localhost:3000/notificacao/postou/1/123
-Content-Type: application/json
+### 1. Create a "Postou" notification
+POST http://localhost:3000/notificacao/postou/6/3
 
-# Example response:
-{
-  "message": "Notification for post created successfully."
-}
-
----
-
-# 2. Create a "Curtiu" notification
+### 2. Create a "Curtiu" notification
 POST http://localhost:3000/notificacao/curtiu/1/456
 Content-Type: application/json
 
-# Example response:
+### Example response:
 {
   "message": "Notification for like created successfully."
 }
 
----
-
-# 3. Create a "Perfil Atualizado" notification
+### 3. Create a "Perfil Atualizado" notification
 POST http://localhost:3000/notificacao/perfil-atualizado/1
 Content-Type: application/json
 
-# Example response:
+### Example response:
 {
   "message": "Notification for profile update created successfully."
 }
 
----
-
-# 4. Create a "Te Seguiu" notification
+### 4. Create a "Te Seguiu" notification
 POST http://localhost:3000/notificacao/followed/2/3
 Content-Type: application/json
 
-# Example response:
+### Example response:
 {
   "message": "Notification for new follower created successfully."
 }
 
----
-
-# 5. Create a "Mensagem Recebida" notification
+### 5. Create a "Mensagem Recebida" notification
 POST http://localhost:3000/notificacao/newmessage/2/4
 Content-Type: application/json
 
-# Example response:
+### Example response:
 {
   "message": "Notification for received message created successfully."
 }
 
----
-
-# 6. Get the latest notifications for a user
+### 6. Get the latest notifications for a user
 GET http://localhost:3000/notificacao/latest/1
 Content-Type: application/json
 
-# Example response:
+### Example response:
 [
   {
     "Id": 1,

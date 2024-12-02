@@ -7,15 +7,16 @@ export class NotificacaoRepository {
 
   // 1. Algum Postou
   async postouNotificacao(usuarioId: number, postId: number): Promise<void> {
-    // Check if the post is made by the logged-in user or someone they follow
-    const post = await this.prismaService.receita.findUnique({
+    // Check if the post exists and get its author
+    const post = await this.prismaService.receita.findFirst({
       where: { Id: postId },
       select: { UsuarioId: true },
     });
-
+ 
     if (!post) return; // If the post doesn't exist, exit
 
     if (post.UsuarioId !== usuarioId) {
+      // Check if the logged-in user follows the post author
       const userFollowing = await this.prismaService.follow.findFirst({
         where: {
           FollowerId: usuarioId,
@@ -38,20 +39,20 @@ export class NotificacaoRepository {
 
   // 2. Algum Curtiu
   async curtiuNotificacao(usuarioId: number, receitaId: number): Promise<void> {
-    // Check if the recipe exists
-    const receita = await this.prismaService.receita.findUnique({
+    // Check if the recipe exists and get its details
+    const receita = await this.prismaService.receita.findFirst({
       where: { Id: receitaId },
+      select: { UsuarioId: true, Titulo: true },
     });
-  
+
     if (!receita) return; // If the recipe doesn't exist, exit
-  
-    // Assume that this action comes from a "like" event (e.g., a button clicked by the user)
-    // Create notification for the user
+
+    // Create notification for the post author
     await this.prismaService.notificacao.create({
       data: {
         Mensagem: `Your post "${receita.Titulo}" was liked!`,
         SentBy: usuarioId,
-        SendTo: receita.UsuarioId, // Notifying the post author
+        SendTo: receita.UsuarioId,
       },
     });
   }
@@ -70,13 +71,15 @@ export class NotificacaoRepository {
 
   // 4. Algum Te Seguiu
   async teSeguiuNotificacao(usuarioId: number, followerId: number): Promise<void> {
-    // Create notification when someone follows the user
-    const user = await this.prismaService.usuario.findUnique({
+    // Check if the user exists
+    const user = await this.prismaService.usuario.findFirst({
       where: { Id: usuarioId },
+      select: { NameTag: true },
     });
 
-    if (!user) return;
+    if (!user) return; // If the user doesn't exist, exit
 
+    // Create notification for the followed user
     await this.prismaService.notificacao.create({
       data: {
         Mensagem: `${user.NameTag} started following you.`,
@@ -114,8 +117,8 @@ export class NotificacaoRepository {
     });
   }
 
-// Delete all notifications sent to a specific user
-async deleteNotificationsSentTo(usuarioId: number): Promise<void> {
+  // Delete all notifications sent to a specific user
+  async deleteNotificationsSentTo(usuarioId: number): Promise<void> {
     await this.prismaService.notificacao.deleteMany({
       where: {
         SendTo: usuarioId,
@@ -131,5 +134,4 @@ async deleteNotificationsSentTo(usuarioId: number): Promise<void> {
       },
     });
   }
-
 }
