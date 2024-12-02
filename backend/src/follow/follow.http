@@ -30,7 +30,8 @@ DELETE http://localhost:3000/api/follow/followers/1
 
 //These Might be Useful Main and  NewPost components
 ### Test: Get Following IDs of User
-GET http://localhost:3000/api/follow/following-ids/1
+GET http://localhost:3000/api/follow/following-ids/3
 
 ### Test: Get Followers IDs of User
-GET http://localhost:3000/api/follow/followers-ids/1
+GET http://localhost:3000/api/follow/followers-ids/3
+ 
