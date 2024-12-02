@@ -1,0 +1,92 @@
+# 1. Create a "Postou" notification
+POST http://localhost:3000/notificacao/postou/1/123
+Content-Type: application/json
+
+# Example response:
+{
+  "message": "Notification for post created successfully."
+}
+
+---
+
+# 2. Create a "Curtiu" notification
+POST http://localhost:3000/notificacao/curtiu/1/456
+Content-Type: application/json
+
+# Example response:
+{
+  "message": "Notification for like created successfully."
+}
+
+---
+
+# 3. Create a "Perfil Atualizado" notification
+POST http://localhost:3000/notificacao/perfil-atualizado/1
+Content-Type: application/json
+
+# Example response:
+{
+  "message": "Notification for profile update created successfully."
+}
+
+---
+
+# 4. Create a "Te Seguiu" notification
+POST http://localhost:3000/notificacao/followed/2/3
+Content-Type: application/json
+
+# Example response:
+{
+  "message": "Notification for new follower created successfully."
+}
+
+---
+
+# 5. Create a "Mensagem Recebida" notification
+POST http://localhost:3000/notificacao/newmessage/2/4
+Content-Type: application/json
+
+# Example response:
+{
+  "message": "Notification for received message created successfully."
+}
+
+---
+
+# 6. Get the latest notifications for a user
+GET http://localhost:3000/notificacao/latest/1
+Content-Type: application/json
+
+# Example response:
+[
+  {
+    "Id": 1,
+    "Mensagem": "Someone posted a new post: 123",
+    "SentBy": 3,
+    "SendTo": 1,
+    "Criado": "2024-12-02T14:25:00.000Z"
+  },
+  {
+    "Id": 2,
+    "Mensagem": "Your post \"My Recipe\" was liked!",
+    "SentBy": 2,
+    "SendTo": 1,
+    "Criado": "2024-12-02T14:30:00.000Z"
+  }
+]
+
+### Delete all notifications sent to user with ID 1
+POST http://localhost:3000/notificacao/delete-sent-to/1
+Content-Type: application/json
+
+{
+  "message": "All notifications sent to user 1 have been deleted."
+}
+
+### Delete all notifications sent by user with ID 1
+POST http://localhost:3000/notificacao/delete-sent-by/1
+Content-Type: application/json
+
+{
+  "message": "All notifications sent by user 1 have been deleted."
+}
