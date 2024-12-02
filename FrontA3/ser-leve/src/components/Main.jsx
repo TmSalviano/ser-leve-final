@@ -130,12 +130,12 @@ function Main() {
           <header className="flex justify-between items-center p-4 border-b border-gray-200">
             <div className="flex items-center gap-3">
               <img
-                src="https://via.placeholder.com/48"
+                src={usuarioId === loggedInUser?.Id ? loggedInUser.ProfilePicture : currentUser.photo}
                 alt={`${titulo}'s profile`}
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-semibold">{titulo}</p>
+                <p className="font-semibold">{usuarioId === loggedInUser?.Id ? loggedInUser.Nome : currentUser.name}</p>
                 <p className="text-gray-400 text-sm">
                   {timeSince(currentTime, new Date(criado))}
                 </p>

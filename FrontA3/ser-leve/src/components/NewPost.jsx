@@ -26,7 +26,7 @@ function NewPost() {
       descricao,
       imagem: image || null, // Use the temporary image URL if available
     };
-
+  
     try {
       const response = await fetch("http://localhost:3000/receita", {
         method: "POST",
@@ -35,23 +35,25 @@ function NewPost() {
         },
         body: JSON.stringify(receitaData),
       });
-
+  
       console.log(response);
-
+  
       if (!response.ok) {
         throw new Error("Failed to create post");
       }
-
+  
       const createdPost = await response.json();
       console.log(createdPost);
-
-      
-
+  
       // Reset form fields
       setTitulo("");
       setResumo("");
       setDescricao("");
       setImage(undefined);
+  
+      // Refresh the page after successful post creation
+      window.location.reload();  // This will reload the current page
+  
     } catch (error) {
       console.error("Error creating post:", error);
     }
