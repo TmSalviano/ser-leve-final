@@ -77,9 +77,9 @@ import { useLoggedUser } from "../contexts/LoggedUserProvider";
         <div className="hidden rounded-lg p-4 sm:flex gap-2 space-y-4 ">
         {/* Conditionally display photo or a black circle with "undefined" */}
         {ProfilePicture ? (
-          <img src={ProfilePicture} className="w-12 h-12 rounded-full object-cover mt-3" alt="Profile" />
+          <img src={ProfilePicture} className="w-14 h-14 rounded-full object-cover mt-3" alt="Profile" />
         ) : (
-          <img src={currentUser.photo} className="w-12 h-12 rounded-full object-cover" alt="DefaultProfile" />
+          <img src={currentUser.photo} className="w-14 h-14 rounded-full object-cover" alt="DefaultProfile" />
         )}
 
         <div className="leading-snug">
