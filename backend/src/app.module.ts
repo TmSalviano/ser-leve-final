@@ -4,13 +4,14 @@ import { AppService } from './app.service';
 import { UsuarioModule } from './usuario/usuario.module';
 import { TempModule } from './temp/temp.module';
 import { DevDbModule } from './dev-db/dev-db.module';
+import { FollowModule } from './follow/follow.module';
 
 //Modules: a section of your backend
 @Module({
   //Imports other modules to this one
   //This is important because sometimes one module depends on another module. 
   //Cyclical Module Dependecny: A depends on B and B depends on A. BIG ARCHITECTURAL MISTAKE
-  imports: [UsuarioModule, TempModule, DevDbModule],
+  imports: [UsuarioModule, TempModule, DevDbModule, FollowModule], // I should be able to call follow repo methods in usuarios modulw now
   //reponsible for http requests and responses
   controllers: [AppController],
   //every injectable thing that is not a controller

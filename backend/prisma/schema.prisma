@@ -18,9 +18,18 @@ model Usuario {
   Password String
   ProfilePicture String?
   Biografy String?
-  Following String? 
+  Following Follow[] @relation("Following")
+  Followers Follow[] @relation("Followers")
   DarkMode Boolean @default(false)
   IsLoggedIn Boolean @default(false)
-  
+}
+
+model Follow {
+  FollowerId Int
+  FollowingId Int
+  Follower Usuario @relation("Followers", fields: [FollowerId], references: [Id])
+  Following Usuario @relation("Following", fields: [FollowingId], references: [Id])
+
+  @@id([FollowerId, FollowingId]) // Composite primary (ensures unique pairs)
 }
 
