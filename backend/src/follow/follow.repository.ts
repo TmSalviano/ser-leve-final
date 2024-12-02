@@ -50,4 +50,19 @@ export class FollowRepository {
           },
         });
       }
+    async deleteAllFollowing(userId: number) {
+      return await this.prismaService.follow.deleteMany({
+        where: {
+          FollowerId: userId, // Deleting all following relationships where the user is the follower
+        },
+      });
+    }
+
+    async deleteAllFollowers(userId: number) {
+      return await this.prismaService.follow.deleteMany({
+        where: {
+          FollowingId: userId, // Deleting all following relationships where the user is the following
+        },
+      });
+    }
 } 
