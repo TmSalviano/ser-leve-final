@@ -21,10 +21,10 @@ GET http://localhost:3000/api/follow/followers/1
 GET http://localhost:3000/api/follow/following/1
 
 ### Test: Delete All Users that Current User is Following
-DELETE http://localhost:3000/api/follow/following/1
+DELETE http://localhost:3000/api/follow/following/9
 
 ### Test: Delete All Followers of Current User
-DELETE http://localhost:3000/api/follow/followers/1
+DELETE http://localhost:3000/api/follow/followers/7
 
 
 

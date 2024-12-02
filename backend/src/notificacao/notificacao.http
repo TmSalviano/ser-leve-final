@@ -41,7 +41,7 @@ GET http://localhost:3000/notificacao/latest/3
 Content-Type: application/json
 
 ### Delete all notifications sent to user with ID 1
-POST http://localhost:3000/notificacao/delete-sent-to/3
+POST http://localhost:3000/notificacao/delete-sent-to/6
 Content-Type: application/json
 
 {
@@ -49,7 +49,7 @@ Content-Type: application/json
 }
 
 ### Delete all notifications sent by user with ID 1
-POST http://localhost:3000/notificacao/delete-sent-by/3
+POST http://localhost:3000/notificacao/delete-sent-by/6
 Content-Type: application/json
 
 {
