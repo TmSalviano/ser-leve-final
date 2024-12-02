@@ -114,15 +114,16 @@ function Aside() {
 
   // Define static news array
   const news = [
-    { title: "Nova atualização no React 18", link: "#", source: "Tech News" },
-    { title: "JavaScript continua em alta em 2024", link: "#", source: "Dev Weekly" },
-    { title: "Tailwind CSS: dicas avançadas", link: "#", source: "Frontend Blog" },
-    { title: "Nova atualização no React 18", link: "#", source: "Tech News" },
-    { title: "JavaScript continua em alta em 2024", link: "#", source: "Dev Weekly" },
+    { title: "Tendências Gastronômicas para 2024", link: "https://www.cnnbrasil.com.br", source: "CNN Brasil" },
+    { title: "Bebidas Funcionais: Saúde Intestinal em Foco", link: "https://portuguese.foodinsight.org", source: "Food Insight" },
+    { title: "Dieta das Zonas Azuis: Longevidade e Bem-Estar", link: "https://forbes.com.br", source: "Forbes Brasil" },
+    { title: "Receitas e Proteínas Vegetais em Alta", link: "https://portuguese.foodinsight.org", source: "Food Insight" },
+    { title: "Eventos Gastronômicos Imperdíveis de 2024", link: "https://www.cnnbrasil.com.br", source: "CNN Brasil" },
   ];
+  
 
   return (
-    <aside className="w-full sm:w-1/4 space-y-4 p-4">
+    <aside className="w-full sm:w-1/4 space-y-4 p-4 flex flex-col justify-between">
       {/* Search input */}
       <div className="mb-4">
         <input
@@ -135,16 +136,19 @@ function Aside() {
       </div>
 
       {/* Quem seguir (Recommended Profiles) */}
-      <div>
+      <div className="flex-grow">
         <h2 className="font-semibold text-lg mb-2">Quem seguir</h2>
         <ul className="space-y-3">
           {recommendedProfiles.length > 0 ? (
+            
             recommendedProfiles.map((profile, i) => (
+              console.log(profile),
+
               <li key={i} className="flex items-center gap-3 p-4 border rounded-lg shadow-sm">
                 <img
-                  src={profile.ProfilePicture || currentUser.photo}
+                  src={profile.ProfilePicture|| currentUser.photo}
                   alt={profile.Nome}
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-medium text-sm">{profile.Nome}</p>

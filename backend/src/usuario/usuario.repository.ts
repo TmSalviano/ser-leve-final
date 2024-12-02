@@ -202,13 +202,13 @@ export class UsuarioRepository {
             });
     
             if (!usuario) {
-                return { success: false, message: 'User not found' };
+                return null;
             }
     
-            return { success: true, profilePicture: usuario.ProfilePicture };
+            return usuario.ProfilePicture.toString();
         } catch (error) {
             console.error('Error fetching profile picture:', error);
-            return { success: false, message: 'Error fetching profile picture' };
+            return null;
         }
     }
       

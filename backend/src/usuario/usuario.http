@@ -23,7 +23,7 @@ GET http://localhost:3000/api/usuario/3
 ###
 GET http://localhost:3000/api/usuario
 ###
-DELETE http://localhost:3000/api/usuario/2
+DELETE http://localhost:3000/api/usuario/3
 ###
 PATCH  http://localhost:3000/api/usuario/2 
 Content-Type: application/json
@@ -83,7 +83,7 @@ Content-Type: application/json
 GET  http://localhost:3000/api/usuario/QuemSeguir/3?queryString=limao
 
 ###
-GET http://localhost:3000/api/usuario/profile-picture/3
+GET http://localhost:3000/api/usuario/profile-picture/5
 ###
 GET http://localhost:3000/api/usuario/allreceitas
 ###

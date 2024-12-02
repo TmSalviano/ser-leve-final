@@ -1,5 +1,3 @@
-import Nav from '../../components/Nav';
-import Sidebar from '../../components/SideBar';
 import { useState } from 'react';
 import { useLoggedUser } from "../../contexts/LoggedUserProvider";
 import { currentUser } from '../../data/currentUser';
@@ -36,7 +34,7 @@ const Settings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Prepare the updated data to send to the server
     const updatedData = {
       Nome: profileData.Nome,
@@ -45,7 +43,7 @@ const Settings = () => {
       Biografy: profileData.Biografy,
       DarkMode: profileData.DarkMode,
     };
-  
+
     try {
       // Make the POST request to the backend to update the user's profile
       const response = await fetch(`http://localhost:3000/api/usuario/editProfile/${Id}`, {
@@ -55,23 +53,22 @@ const Settings = () => {
         },
         body: JSON.stringify(updatedData), // Convert the data to JSON
       });
-  
-      // Check if the response is successful
+
       if (!response.ok) {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);
         return;
       }
-  
+
       // Assuming successful response, update the user data in context
       const updatedUser = {
         ...loggedInUser,
         ...updatedData, // Update the logged-in user data with the new profile details
       };
-  
+
       setUser(updatedUser); // Update the logged-in user state in context
       alert("Perfil atualizado com sucesso!"); // Notify user of successful update
-  
+
     } catch (error) {
       console.error("Error updating profile:", error);
       alert("Ocorreu um erro ao atualizar o perfil.");
@@ -91,8 +88,11 @@ const Settings = () => {
         {/* Change Profile Picture */}
         <div className="mb-6 text-center">
           <div className="relative inline-block">
+            {/* Display Profile Picture */}
             <img
-              src={profileData.ProfilePicture}
+              src={profileData.ProfilePicture && typeof profileData.ProfilePicture !== 'string'
+                    ? URL.createObjectURL(profileData.ProfilePicture) 
+                    : profileData.ProfilePicture}
               alt="Profile"
               className="w-32 h-32 rounded-full object-cover border-4 border-green-500"
             />
