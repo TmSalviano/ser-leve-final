@@ -6,10 +6,10 @@ export class FollowRepository {
     constructor(private readonly prismaService: PrismaService) {}
 
     async followUser(currentUserId: number, targetUserId: number) {
-        return await this.prismaService.follow({
+        return await this.prismaService.follow.create ({
           data: {
-            followerId: currentUserId,
-            followingId: targetUserId,
+            FollowerId: currentUserId,
+            FollowingId: targetUserId,
           },
         });
       }
@@ -17,9 +17,9 @@ export class FollowRepository {
       async unfollowUser(currentUserId: number, targetUserId: number) {
         return await this.prismaService.follow.delete({
           where: {
-            followerId_followingId: {
-              followerId: currentUserId,
-              followingId: targetUserId,
+            FollowerId_FollowingId: {
+              FollowerId: currentUserId,
+              FollowingId: targetUserId,
             },
           },
         });
@@ -31,7 +31,7 @@ export class FollowRepository {
           include: {
             Followers: {
               include: {
-                follower: true,
+                Follower: true,
               },
             },
           },
@@ -44,7 +44,7 @@ export class FollowRepository {
           include: {
             Following: {
               include: {
-                following: true,
+                Following: true,
               },
             },
           },
