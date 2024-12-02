@@ -21,6 +21,10 @@ model Usuario {
   DarkMode      Boolean   @default(false)
   IsLoggedIn    Boolean   @default(false)
   Receitas      Receita[] @relation("UsuarioReceitas") // Relation to Receita
+
+    SentNotifications Notificacao[] @relation("SentNotifications") // Reverse relation for sent notifications
+  ReceivedNotifications Notificacao[] @relation("ReceivedNotifications") // Reverse relation for received notifications
+
 }
 
 model Receita {
@@ -44,3 +48,16 @@ model Follow {
 
   @@id([FollowerId, FollowingId]) // Composite primary key ensures unique pairs
 }
+
+model Notificacao {
+  Id        Int      @id @default(autoincrement())
+  Mensagem  String   // The content of the notification
+  SentBy    Int      // Foreign key for the user who sent the notification
+  SendTo    Int      // Foreign key for the user who will receive the notification
+  Criado    DateTime @default(now()) // Timestamp for when the notification was created
+
+  SentByUser Usuario @relation("SentNotifications", fields: [SentBy], references: [Id])
+  SendToUser Usuario @relation("ReceivedNotifications", fields: [SendTo], references: [Id])
+}
+
+
