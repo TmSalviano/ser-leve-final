@@ -27,7 +27,7 @@ Content-Type: application/json
 
 
 ### Get a receita by its ID
-GET http://localhost:3000/receita/1
+GET http://localhost:3000/receita/6
 
 ###
 
@@ -61,5 +61,4 @@ POST http://localhost:3000/receita/main-feed
 Content-Type: application/json
 
 [3, 4, 5, 6] 
-
 ###

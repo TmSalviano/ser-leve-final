@@ -31,22 +31,26 @@ export class ReceitaRepository {
       }
 
     async getReceitaById(id: number): Promise<ReceitaDTO | null> {
-    const receita = await this.prismaService.receita.findUnique({
-        where: { Id: id },
-    });
-
-    if (!receita) return null;
-
-    return {
-        id: receita.Id,
-        usuarioId: receita.UsuarioId,
+      const receita = await this.prismaService.receita.findUnique({
+        where: {
+          Id: id, // Correct use of camelCase for 'id'
+        },
+      });
+    
+      if (!receita) return null;
+    
+      return {
+        id: receita.Id,  // Correctly using 'id' in camelCase
+        usuarioId: receita.UsuarioId,  // Correctly using 'usuarioId' in camelCase
         titulo: receita.Titulo,
         resumo: receita.Resumo,
         descricao: receita.Descricao,
         imagem: receita.Imagem,
         criado: receita.Criado,
-    };
+      };
     }
+      
+      
 
     async getAllReceitasByUsuarioId(usuarioId: number): Promise<ReceitaDTO[]> {
     const receitas = await this.prismaService.receita.findMany({
@@ -128,6 +132,31 @@ export class ReceitaRepository {
         }));
     }
 
-   
-
+    async getRandomReceitas(): Promise<ReceitaDTO[]> {
+      const receitas = await this.prismaService.receita.findMany({
+        orderBy: {
+          Criado: 'desc', // Optionally, you can still order by creation date
+        },
+        take: 20, // Fetch more than 6 records to have a variety to shuffle
+      });
+    
+      // Shuffle the results to get random recipes
+      const shuffledReceitas = receitas.sort(() => Math.random() - 0.5);
+    
+      // Pick the first 6 random recipes
+      const randomReceitas = shuffledReceitas.slice(0, 6);
+    
+      return randomReceitas.map((receita) => ({
+        id: receita.Id,
+        usuarioId: receita.UsuarioId,
+        titulo: receita.Titulo,
+        resumo: receita.Resumo,
+        descricao: receita.Descricao,
+        imagem: receita.Imagem,
+        criado: receita.Criado,
+      }));
+    }
+    
+    
+    
 }

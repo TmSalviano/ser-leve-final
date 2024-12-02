@@ -39,5 +39,8 @@ export class ReceitaController {
     return this.receitaRepo.getMainFeed(usuarioIds);
   }
 
-  
+   @Get('random') 
+   async getRandomReceitas() {
+      return this.receitaRepo.getRandomReceitas();
+   }
 }
