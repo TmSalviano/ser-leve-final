@@ -38,4 +38,6 @@ export class ReceitaController {
   async getMainFeed(@Body() usuarioIds: number[]) {
     return this.receitaRepo.getMainFeed(usuarioIds);
   }
+
+  
 }

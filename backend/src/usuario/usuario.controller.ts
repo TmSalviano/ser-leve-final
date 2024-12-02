@@ -89,5 +89,11 @@ export class UsuarioController {
         return this.repo.get5RandomUsers(+Id, queryString)
     }
 
+    @Get('profile-picture/:usuarioId')
+    async getProfilePicture(@Param('usuarioId') usuarioId: string) {
+      const result = await this.repo.getProfilePicture(+usuarioId);
+      return result;
+    }
+
 
 }

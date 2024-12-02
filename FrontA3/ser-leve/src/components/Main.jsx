@@ -61,6 +61,7 @@ function Main() {
       }
 
       const receitasData = await response.json();
+      console.log(receitasData);
       setReceitas(receitasData); // Set the fetched receitas data
     } catch (error) {
       console.error("Error fetching receitas:", error);
@@ -155,6 +156,7 @@ function Main() {
               <p>{titulo}</p>
             </div>
 
+            {/*Isso aqui e a imagem da  */}
             {imagem && (
               <div>
                 <p className="font-bold text-lg">Imagem:</p>
@@ -162,9 +164,13 @@ function Main() {
                   src={imagem}
                   alt="Receita content"
                   className="rounded-lg w-full object-contain"
+                  onError={(e) => {
+                    e.target.closest('div').style.display = 'none'; // Hide the entire div on error
+                  }}
                 />
               </div>
             )}
+
 
             <div>
               <p className="font-bold text-lg">Descrição:</p>

@@ -194,7 +194,23 @@ export class UsuarioRepository {
       
       
       
-      
+      async getProfilePicture(usuarioId: number) {
+        try {
+            const usuario = await this.prismaService.usuario.findFirst({
+                where: { Id: usuarioId },
+                select: { ProfilePicture: true }, // Only select the ProfilePicture field
+            });
+    
+            if (!usuario) {
+                return { success: false, message: 'User not found' };
+            }
+    
+            return { success: true, profilePicture: usuario.ProfilePicture };
+        } catch (error) {
+            console.error('Error fetching profile picture:', error);
+            return { success: false, message: 'Error fetching profile picture' };
+        }
+    }
       
       
       
