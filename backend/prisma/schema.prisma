@@ -1,35 +1,46 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// This is your Prisma schema file
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "sqlite" // You can replace this with "postgresql", "mysql", etc.
+  url      = env("DATABASE_URL") // Ensure you have the DATABASE_URL in your .env file
 }
 
 model Usuario {
-  Id Int @id @default(autoincrement())
-  Nome String?
-  NameTag String @unique
-  Email String @unique
-  Password String
+  Id            Int       @id @default(autoincrement())
+  Nome          String?
+  NameTag       String    @unique
+  Email         String    @unique
+  Password      String
   ProfilePicture String?
-  Biografy String?
-  Following Follow[] @relation("Following") 
-  Followers Follow[] @relation("Followers") 
-  DarkMode Boolean @default(false)
-  IsLoggedIn Boolean @default(false)
+  Biografy      String?
+  Following     Follow[]  @relation("Following") 
+  Followers     Follow[]  @relation("Followers") 
+  DarkMode      Boolean   @default(false)
+  IsLoggedIn    Boolean   @default(false)
+  Receitas      Receita[] @relation("UsuarioReceitas") // Relation to Receita
+}
+
+model Receita {
+  Id          Int      @id @default(autoincrement())
+  UsuarioId   Int      // Foreign key for the Usuario model
+  Titulo      String
+  Resumo      String
+  Descricao   String
+  Imagem      String?
+  Criado      DateTime @default(now()) // Timestamp of creation
+  Usuario     Usuario @relation("UsuarioReceitas", fields: [UsuarioId], references: [Id]) // Relating back to the Usuario
+
+  @@index([UsuarioId, Criado]) // Index to optimize queries by UsuarioId and Created Time
 }
 
 model Follow {
-  FollowerId Int
+  FollowerId  Int
   FollowingId Int
-  Follower Usuario @relation("Followers", fields: [FollowerId], references: [Id])
-  Following Usuario @relation("Following", fields: [FollowingId], references: [Id])
+  Follower    Usuario @relation("Followers", fields: [FollowerId], references: [Id])
+  Following   Usuario @relation("Following", fields: [FollowingId], references: [Id])
 
-  @@id([FollowerId, FollowingId]) // Composite primary (ensures unique pairs)
+  @@id([FollowerId, FollowingId]) // Composite primary key ensures unique pairs
 }
-
