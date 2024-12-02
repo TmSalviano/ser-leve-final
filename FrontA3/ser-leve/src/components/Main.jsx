@@ -115,7 +115,7 @@ function Main() {
   }, []);
 
   return (
-    <main className="lg:w-3/4 rounded-lg space-y-6 flex flex-col flex-grow">
+    <main className="lg:w-3/4 rounded-lg space-y-6 flex flex-col flex-grow mt-96">
       {/* Create new receita */}
       <NewPost />
 

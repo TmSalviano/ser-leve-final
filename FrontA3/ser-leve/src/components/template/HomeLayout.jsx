@@ -34,11 +34,11 @@ export default function HomeLayout({
         <div className="flex flex-grow ">
           <Sidebar />
           <div
-            className="w-full p-4 shadow-md rounded flex-grow overflow-y-auto mt-1" // Enable vertical scrolling
+            className="w-full p-4 shadow-md rounded flex-grow overflow-y-auto" // Enable vertical scrolling
             style={{
               ...styles.container,
               backgroundColor: colors.accentColor1,
-              maxHeight: "calc(100vh - 4rem)", // Adjust height for header/Nav height
+              maxHeight: "calc(100vh - 0rem)", // Adjust height for header/Nav height
             }}
           >
             {children}
