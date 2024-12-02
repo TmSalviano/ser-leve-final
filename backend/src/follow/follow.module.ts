@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { FollowRepository } from './follow.repository';
-import { FollowControllerController } from './follow.controller.controller';
 import { DevDbModule } from 'src/dev-db/dev-db.module';
+import { FollowController } from './follow.controller';
 
 @Module({
   imports: [DevDbModule],
   providers: [FollowRepository],
-  controllers: [FollowControllerController],
+  controllers: [FollowController],
   exports: [FollowRepository],
 })
 export class FollowModule {
