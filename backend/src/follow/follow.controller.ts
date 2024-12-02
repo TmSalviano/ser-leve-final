@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { FollowRepository } from './follow.repository';
 
-@Controller('follow')
+@Controller('/api/follow')
 export class FollowController {
     constructor(private readonly followRepo: FollowRepository) {}
 
-  @Post('follow:Id')
+  @Post('follow/:Id')
   async followUser(@Param('Id') currentUserId: string, @Body() { targetUserId }: { targetUserId: number }) {
     return this.followRepo.followUser(+currentUserId, targetUserId);
   }

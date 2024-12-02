@@ -145,4 +145,57 @@ export class UsuarioRepository {
 
     }
 
+
+    //Aside Component Functions
+    async get5RandomUsers(loggedInUserId: number, queryString: string): Promise<Usuario[]> {
+        try {
+          // Base where clause to exclude the logged-in user
+          const whereClause: any = {
+            Id: { not: loggedInUserId }, // Exclude the logged-in user
+          };
+      
+          if (queryString.trim()) {
+            // Trim the queryString for any excess spaces and convert it to lowercase
+            const query = queryString.trim().toLowerCase(); 
+      
+            // Add filtering conditions for each field with lowercase comparisons
+            whereClause.OR = [
+              { Nome: { contains: query.toLowerCase() } },  // Match Name
+              { NameTag: { contains: query.toLowerCase() } }, // Match NameTag
+              { Email: { contains: query.toLowerCase() } }    // Match Email
+            ];
+          }
+      
+          // Fetch the matching users based on the built where clause
+          const users = await this.prismaService.usuario.findMany({
+            where: whereClause,
+          });
+      
+          // If no users are found, return an empty array
+          if (users.length === 0) {
+            return [];
+          }
+      
+          // If exactly one user is found, return that user immediately
+          if (users.length === 1) {
+            return users;
+          }
+      
+          // Shuffle the array and select up to 5 random users
+          const shuffledUsers = users.sort(() => 0.5 - Math.random());
+          const randomUsers = shuffledUsers.slice(0, 5);
+      
+          return randomUsers;
+        } catch (error) {
+          console.error('Error fetching random users:', error);
+          return [];
+        }
+      }
+      
+      
+      
+      
+      
+      
+      
 }

@@ -18,8 +18,8 @@ model Usuario {
   Password String
   ProfilePicture String?
   Biografy String?
-  Following Follow[] @relation("Following")
-  Followers Follow[] @relation("Followers")
+  Following Follow[] @relation("Following") 
+  Followers Follow[] @relation("Followers") 
   DarkMode Boolean @default(false)
   IsLoggedIn Boolean @default(false)
 }

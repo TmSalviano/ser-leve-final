@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 import Usuario from './entities/usuario.entity';
 import { UsuarioRepository } from './usuario.repository';
+import { FollowRepository } from 'src/follow/follow.repository';
 
 @Controller('/api/usuario')
 export class UsuarioController {
-    constructor(private repo: UsuarioRepository) {}
+    constructor(private repo: UsuarioRepository, private followRepo: FollowRepository) {}
 
     //CRUD endpoints
     @Post() 
@@ -79,6 +80,13 @@ export class UsuarioController {
       const { Nome, NameTag, ProfilePicture, Biografy, DarkMode } = body;
       // Convert the Id to a number, as it's typically a number in your database
       return this.repo.editProfile(+Id, Nome, NameTag, ProfilePicture, Biografy, DarkMode);
+    }
+
+    //Query For Users in Quem Seguir (Aside component)
+    @Get('/QuemSeguir/:loggedInId')
+    async get5Random(@Param('loggedInId') Id: string, @Query('queryString') queryString: string = "") : Promise<Usuario[]>  {
+        console.log(queryString)
+        return this.repo.get5RandomUsers(+Id, queryString)
     }
 
 
