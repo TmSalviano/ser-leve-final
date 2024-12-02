@@ -18,38 +18,56 @@ function Main() {
   const [currentTime, setCurrentTime] = useState(Date.now());
   const { loggedInUser } = useLoggedUser();
 
+  const handleTrash = async (receitaId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/receita/${receitaId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete receita");
+      }
+
+      // Remove the deleted receita from the state
+      setReceitas((prevReceitas) =>
+        prevReceitas.filter((receita) => receita.id !== receitaId)
+      );
+      console.log(`Receita with ID ${receitaId} deleted successfully.`);
+    } catch (error) {
+      console.error("Error deleting receita:", error);
+    }
+  };
 
   // Fetch receitas using following IDs
-  const fetchReceitas = async () => { 
+  const fetchReceitas = async () => {
     try {
       if (followingIds.length === 0) return; // Skip if there are no following IDs
-  
-      // Ensure that all followingIds and loggedInUser.Id are numbers
-      const numericFollowingIds = followingIds.map(id => Number(id)); // Convert each ID to a number
-  
+
+      const numericFollowingIds = followingIds.map((id) => Number(id));
+
       const response = await fetch("http://localhost:3000/receita/main-feed", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        // Combine both arrays of IDs, ensuring all are numbers
-        body: JSON.stringify([...numericFollowingIds, loggedInUser?.Id]), // Pass the following IDs
+        body: JSON.stringify([...numericFollowingIds, loggedInUser?.Id]),
       });
-  
+
       if (!response.ok) {
         throw new Error(`Failed to fetch receitas: ${response.statusText}`);
       }
-  
+
       const receitasData = await response.json();
-      console.log("Receitas:", receitasData);
       setReceitas(receitasData); // Set the fetched receitas data
     } catch (error) {
       console.error("Error fetching receitas:", error);
     }
   };
-  
 
-  const followingIdArray = async () => { 
+  const followingIdArray = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/follow/following-ids/3", {
         method: "GET",
@@ -57,39 +75,34 @@ function Main() {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.statusText}`);
       }
-  
+
       const data = await response.json();
-      console.log("Following IDs:", data);
-  
-      // Ensure the data is an array of numbers
-      const validIds = Array.isArray(data) ? data.map(Number).filter(id => !isNaN(id)) : [];
-      return validIds;
+      return Array.isArray(data) ? data.map(Number).filter((id) => !isNaN(id)) : [];
     } catch (error) {
       console.error("Error fetching following IDs:", error);
       return [];
     }
   };
 
-  // Trigger the fetch of following IDs on initial load
+  // Fetch following IDs and set state
   useEffect(() => {
     const fetchFollowingIds = async () => {
       const fetchedIds = await followingIdArray();
-      // Now typecast to numbers and set the state
       const numberIds = fetchedIds.map((id) => Number(id));
       setFollowingIds(numberIds);
     };
 
     fetchFollowingIds();
-  }, []); // Only run once when the component mounts
+  }, []);
 
-  // Trigger the fetch of receitas whenever followingIds change
+  // Fetch receitas when followingIds change
   useEffect(() => {
     fetchReceitas();
-  }, [followingIds]); // Runs every time followingIds change
+  }, [followingIds]);
 
   // Update the current time every second
   useEffect(() => {
@@ -106,18 +119,17 @@ function Main() {
       <NewPost />
 
       {/* Render receitas */}
-      {receitas.map(({ id, usuarioId, titulo, resumo, descricao, imagem, criado }, i) => (
+      {receitas.map(({ id, usuarioId, titulo, resumo, descricao, imagem, criado }) => (
         <div
           key={id}
-          className="bg-white rounded-lg p-4 shadow-lg flex flex-col mx-auto"
+          className="bg-white rounded-lg shadow-lg flex flex-col mx-auto"
           style={{ minWidth: "59rem" }}
         >
           {/* Receita Header */}
-          <header className="flex justify-between items-center mb-4">
+          <header className="flex justify-between items-center p-4 border-b border-gray-200">
             <div className="flex items-center gap-3">
-              {/* User profile photo */}
               <img
-                src="https://via.placeholder.com/48" // Replace with user photo
+                src="https://via.placeholder.com/48"
                 alt={`${titulo}'s profile`}
                 className="w-12 h-12 rounded-full object-cover"
               />
@@ -128,29 +140,40 @@ function Main() {
                 </p>
               </div>
             </div>
-            {usuarioId === loggedInUser.id && (
+            {usuarioId === loggedInUser?.Id && (
               <TrashIcon
-                className="w-6 h-6 text-gray-500 cursor-pointer hover:text-gray-600"
-                onClick={() => deletePost(id, setReceitas)} // Modify this if needed
+                className="w-6 h-6 text-gray-500 cursor-pointer hover:text-gray-600 transition-all"
+                onClick={() => handleTrash(id, loggedInUser?.Id)}
               />
             )}
           </header>
 
-          {/* Receita Content */}
-          <div className="mb-4">
-            <p className="text-lg mb-2">{resumo}</p>
-            <p className="text-gray-600 text-sm">{descricao}</p>
+          {/* Receita Body (Content) */}
+          <div className="p-4 space-y-4">
+            <div>
+              <p className="font-bold text-lg">Título:</p>
+              <p>{titulo}</p>
+            </div>
+
             {imagem && (
-              <img
-                src={imagem}
-                alt="Receita content"
-                className="rounded-lg w-full object-contain mt-2"
-              />
+              <div>
+                <p className="font-bold text-lg">Imagem:</p>
+                <img
+                  src={imagem}
+                  alt="Receita content"
+                  className="rounded-lg w-full object-contain"
+                />
+              </div>
             )}
+
+            <div>
+              <p className="font-bold text-lg">Descrição:</p>
+              <p className="text-gray-600">{descricao}</p>
+            </div>
           </div>
 
           {/* Receita Footer */}
-          <footer className="flex justify-between items-center pt-2 border-t border-gray-200">
+          <footer className="flex justify-between items-center p-4 border-t border-gray-200">
             <div className="flex gap-4">
               <HeartIcon className="w-6 h-6 cursor-pointer hover:text-gray-500 transition-all" />
               <ChatBubbleLeftIcon className="w-6 h-6 cursor-pointer hover:text-gray-500 transition-all" />
