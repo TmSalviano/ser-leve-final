@@ -74,12 +74,12 @@ import { useLoggedUser } from "../contexts/LoggedUserProvider";
 
     return (
       <div className=" w-full sm:w-auto bottom-0 left-0  lg:w-1/4 sm:static flex flex-col justify-between">
-        <div className="hidden rounded-lg p-4 sm:flex gap-2 space-y-4">
+        <div className="hidden rounded-lg p-4 sm:flex gap-2 space-y-4 ">
         {/* Conditionally display photo or a black circle with "undefined" */}
         {ProfilePicture ? (
-          <img src={ProfilePicture} className="w-12 rounded-full" alt="Profile" />
+          <img src={ProfilePicture} className="w-12 h-12 rounded-full object-cover mt-3" alt="Profile" />
         ) : (
-          <img src={currentUser.photo} className="w-12 rounded-full" alt="DefaultProfile" />
+          <img src={currentUser.photo} className="w-12 h-12 rounded-full object-cover" alt="DefaultProfile" />
         )}
 
         <div className="leading-snug">

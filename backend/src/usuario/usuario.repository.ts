@@ -26,9 +26,20 @@ export class UsuarioRepository {
 
     async criar(usuario: Usuario) {
         return this.prismaService.usuario.create({
-            data: usuario as any,
-        })
-    }
+          data: {
+            NameTag: usuario.NameTag,
+            Email: usuario.Email,
+            Password: usuario.Password,
+            Nome: usuario.Nome || null,  // Optional fields can still be null
+            ProfilePicture: usuario.ProfilePicture || null,
+            Biografy: usuario.Biografy || null,
+            DarkMode: false, // Default value if required
+            IsLoggedIn: false, // Default value if required
+            // Do not include `Following` here if it's not required for the user creation
+          },
+        });
+      }
+      
 
     async update(usuario: Usuario) {
         if (!usuario.Id) throw new Error("Usuario sem id");

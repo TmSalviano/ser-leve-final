@@ -1,3 +1,5 @@
+import Nav from '../../components/Nav';
+import Sidebar from '../../components/SideBar';
 import { useState } from 'react';
 import { useLoggedUser } from "../../contexts/LoggedUserProvider";
 import { currentUser } from '../../data/currentUser';
@@ -10,7 +12,7 @@ const Settings = () => {
     NameTag: NameTag || "", // Initialize NameTag
     Nome: Nome || "", // Initialize Nome
     Biografy: Biografy || "", // Initialize Biografy
-    ProfilePicture: ProfilePicture || currentUser.photo, // Initialize ProfilePicture
+    ProfilePicture: ProfilePicture || currentUser.photo, // Initialize ProfilePicture URL (used for display)
     DarkMode: DarkMode || false, // Initialize DarkMode
   });
 
@@ -26,49 +28,59 @@ const Settings = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Create a temporary URL for the uploaded image
+      // Create a temporary URL for the uploaded image for display
       const imageUrl = URL.createObjectURL(file);
-      setProfileData({ ...profileData, ProfilePicture: imageUrl });
+      setProfileData({ ...profileData, ProfilePicture: imageUrl });  // Set the Blob URL to ProfilePicture
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Prepare the updated data to send to the server
     const updatedData = {
       Nome: profileData.Nome,
       NameTag: profileData.NameTag,
-      ProfilePicture: profileData.ProfilePicture,
+      ProfilePicture: profileData.ProfilePicture,  // We only send the raw URL here
       Biografy: profileData.Biografy,
       DarkMode: profileData.DarkMode,
     };
-
+  
     try {
       // Make the POST request to the backend to update the user's profile
+      const formData = new FormData();
+      formData.append('Nome', updatedData.Nome);
+      formData.append('NameTag', updatedData.NameTag);
+      formData.append('Biografy', updatedData.Biografy);
+      formData.append('DarkMode', updatedData.DarkMode);
+      formData.append('ProfilePicture', profileData.ProfilePicture);
+
+      // Send the form data with the file
       const response = await fetch(`http://localhost:3000/api/usuario/editProfile/${Id}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData), // Convert the data to JSON
+        body: formData, // Send the FormData (which includes the file)
       });
-
+  
+      // Check if the response is successful
       if (!response.ok) {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);
         return;
       }
-
+  
       // Assuming successful response, update the user data in context
       const updatedUser = {
         ...loggedInUser,
-        ...updatedData, // Update the logged-in user data with the new profile details
+        Nome: updatedData.Nome,
+        NameTag: updatedData.NameTag,
+        Biografy: updatedData.Biografy,
+        DarkMode: updatedData.DarkMode,
+        ProfilePicture: updatedData.ProfilePicture,  // Keep the raw URL in the profile
       };
-
+  
       setUser(updatedUser); // Update the logged-in user state in context
       alert("Perfil atualizado com sucesso!"); // Notify user of successful update
-
+  
     } catch (error) {
       console.error("Error updating profile:", error);
       alert("Ocorreu um erro ao atualizar o perfil.");
@@ -88,11 +100,8 @@ const Settings = () => {
         {/* Change Profile Picture */}
         <div className="mb-6 text-center">
           <div className="relative inline-block">
-            {/* Display Profile Picture */}
             <img
-              src={profileData.ProfilePicture && typeof profileData.ProfilePicture !== 'string'
-                    ? URL.createObjectURL(profileData.ProfilePicture) 
-                    : profileData.ProfilePicture}
+              src={profileData.ProfilePicture} // Use the temp URL for display
               alt="Profile"
               className="w-32 h-32 rounded-full object-cover border-4 border-green-500"
             />
