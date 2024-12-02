@@ -4,10 +4,10 @@ Content-Type: application/json
 
 {
   "usuarioId": 3, 
-  "titulo": "Delicious Pizza",
-  "resumo": "A simple pizza recipe",
-  "descricao": "A detailed description of a delicious pizza recipe.",
-  "imagem": "pizza.jpg"
+  "titulo": "Delicious limoeiro",
+  "resumo": "A simple limoeiro recipe",
+  "descricao": "A detailed description of a delicious limoeiro recipe.",
+  "imagem": "limoeiro.jpg"
 }
 ###
 

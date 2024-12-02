@@ -65,4 +65,30 @@ export class FollowRepository {
         },
       });
     }
+
+    async getFollowingIds(userId: number): Promise<number[]> {
+      const following = await this.prismaService.follow.findMany({
+        where: {
+          FollowerId: userId, // Get all users that the user is following
+        },
+        select: {
+          FollowingId: true, // Only select the FollowingId (user ids the current user is following)
+        },
+      });
+  
+      return following.map(follow => follow.FollowingId);
+    }
+
+    async getFollowersIds(userId: number): Promise<number[]> {
+      const followers = await this.prismaService.follow.findMany({
+        where: {
+          FollowingId: userId, // Get all users who are following the given user
+        },
+        select: {
+          FollowerId: true, // Only select the FollowerId (user ids that are following the current user)
+        },
+      });
+  
+      return followers.map(follow => follow.FollowerId);
+    }
 } 

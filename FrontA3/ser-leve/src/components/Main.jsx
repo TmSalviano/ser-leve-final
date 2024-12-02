@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Posts } from "../data/posts";
-import { timeSince } from "../utils/timeSince"; //post time should be at my Post Model
+import { timeSince } from "../utils/timeSince";
 import {
   ChatBubbleLeftIcon,
   HeartIcon,
@@ -10,9 +10,6 @@ import {
 import NewPost from "./NewPost";
 import { currentUser } from "../data/currentUser";
 import { deletePost } from "../utils/NewPostUtils";
-
-//./Main/
-import ReceitaCard from "./Main/ReceitaCard";
 
 function Main() {
   const [posts, setPosts] = useState(Posts);
@@ -27,60 +24,66 @@ function Main() {
   }, []);
 
   return (
-    <main className="lg:w-3/4 rounded-lg space-y-4 flex flex-col flex-grow">
-      <NewPost setPosts={setPosts} setCurrentTime={setCurrentTime} />
+    <main className="lg:w-3/4 rounded-lg space-y-6 flex flex-col flex-grow">
+      {/* Create new post */}
+      <NewPost />
 
-    {/*This defines the skeleton of the posts when posted 
-       Add: A better defined post card like structure with better defined sections for Title, Description, Resume, Image.
-    */}
+      {/* Render posts */}
       {posts.map(({ id, name, photo, time, content }, i) => (
-        <div key={i} className="bg-white p-2 rounded-lg flex flex-col">
-          {/*Username, Profile Pic, Post's time, delete post button*/}
-          <header className="flex justify-between">
-            <div className="flex gap-2">
-              {/*This is the user profile photo */}
+        <div
+          key={i}
+          className="bg-white rounded-lg p-4 shadow-lg flex flex-col mx-auto"
+          style={{ minWidth: "59rem" }}
+        >
+          {/* Post Header */}
+          <header className="flex justify-between items-center mb-4">
+            <div className="flex items-center gap-3">
+              {/* User profile photo */}
               <img
                 src={photo}
+                alt={`${name}'s profile`}
                 className="w-12 h-12 rounded-full object-cover"
               />
-
-              <div className="leading-tight">
+              <div>
                 <p className="font-semibold">{name}</p>
-                <p className="text-gray-400">{timeSince(currentTime, time)}</p>
+                <p className="text-gray-400 text-sm">
+                  {timeSince(currentTime, time)}
+                </p>
               </div>
             </div>
             {name === currentUser.name && (
               <TrashIcon
-                className="size-5 cursor-pointer text-gray-500 hover:text-gray-600"
+                className="w-6 h-6 text-gray-500 cursor-pointer hover:text-gray-600"
                 onClick={() => deletePost(id, setPosts)}
               />
             )}
           </header>
 
-          {/*This is the post itself: the text an the image*/}
-          <div className="flex flex-col justify-content-center items-center">
+          {/* Post Content */}
+          <div className="mb-4">
             {content.text.split("\n").map((text, i) => (
-              <p key={i} className="text-lg mb-2 self-start">
-                {text}
-              </p>
+              <p key={i} className="text-lg mb-2">{text}</p>
             ))}
-
-            <img src={content.img} className="flex-grow-0" />
+            {content.img && (
+              <img
+                src={content.img}
+                alt="Post content"
+                className="rounded-lg w-full object-contain mt-2"
+              />
+            )}
           </div>
 
-          {/*Liking the comment +  complex functionality -> commenting and sharing.*/}
-          <footer className="flex justify-between py-2">
-            <div className="flex gap-6">
-              <HeartIcon className="size-5 cursor-pointer hover:text-gray-500 transition-all" />
-              <ChatBubbleLeftIcon className="size-5 cursor-pointer hover:text-gray-500 transition-all" />
+          {/* Post Footer */}
+          <footer className="flex justify-between items-center pt-2 border-t border-gray-200">
+            <div className="flex gap-4">
+              <HeartIcon className="w-6 h-6 cursor-pointer hover:text-gray-500 transition-all" />
+              <ChatBubbleLeftIcon className="w-6 h-6 cursor-pointer hover:text-gray-500 transition-all" />
             </div>
-            <ShareIcon className="size-5 cursor-pointer hover:text-gray-500 transition-all" />
+            <ShareIcon className="w-6 h-6 cursor-pointer hover:text-gray-500 transition-all" />
           </footer>
         </div>
-      )
-    )
-  }
-  </main>
+      ))}
+    </main>
   );
 }
 

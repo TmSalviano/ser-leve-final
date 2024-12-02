@@ -1,8 +1,36 @@
-###
-DELETE http://localhost:3000/api/follow/following/3
+### Test: Follow User
+POST http://localhost:3000/api/follow/follow/1
 Content-Type: application/json
-###
-### 
+
+{
+  "targetUserId": 2
+}
+
+### Test: Unfollow User
+POST http://localhost:3000/api/follow/unfollow/1
+Content-Type: application/json
+
+{
+  "targetUserId": 2
+}
+
+### Test: Get Followers of User
+GET http://localhost:3000/api/follow/followers/1
+
+### Test: Get Following of User
+GET http://localhost:3000/api/follow/following/1
+
+### Test: Delete All Users that Current User is Following
+DELETE http://localhost:3000/api/follow/following/1
+
+### Test: Delete All Followers of Current User
 DELETE http://localhost:3000/api/follow/followers/1
-Content-Type: application/json
-###
+
+
+
+//These Might be Useful Main and  NewPost components
+### Test: Get Following IDs of User
+GET http://localhost:3000/api/follow/following-ids/1
+
+### Test: Get Followers IDs of User
+GET http://localhost:3000/api/follow/followers-ids/1

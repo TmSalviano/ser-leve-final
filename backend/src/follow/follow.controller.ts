@@ -6,12 +6,18 @@ export class FollowController {
   constructor(private readonly followRepo: FollowRepository) {}
 
   @Post('follow/:Id')
-  async followUser(@Param('Id') currentUserId: string, @Body() { targetUserId }: { targetUserId: number }) {
+  async followUser(
+    @Param('Id') currentUserId: string,
+    @Body() { targetUserId }: { targetUserId: number },
+  ) {
     return this.followRepo.followUser(+currentUserId, targetUserId);
   }
 
   @Post('unfollow/:Id')
-  async unfollowUser(@Param('Id') currentUserId: string, @Body() { targetUserId }: { targetUserId: number }) {
+  async unfollowUser(
+    @Param('Id') currentUserId: string,
+    @Body() { targetUserId }: { targetUserId: number },
+  ) {
     return this.followRepo.unfollowUser(+currentUserId, targetUserId);
   }
 
@@ -35,5 +41,17 @@ export class FollowController {
   @Delete('followers/:Id')
   async deleteAllFollowers(@Param('Id') userId: string) {
     return this.followRepo.deleteAllFollowers(+userId);
+  }
+
+  // Endpoint to get an array of user ids that the given user is following
+  @Get('following-ids/:Id')
+  async getFollowingIds(@Param('Id') userId: string) {
+    return this.followRepo.getFollowingIds(+userId);
+  }
+
+  // Endpoint to get an array of user ids of followers of the given user
+  @Get('followers-ids/:Id')
+  async getFollowersIds(@Param('Id') userId: string) {
+    return this.followRepo.getFollowersIds(+userId);
   }
 }
