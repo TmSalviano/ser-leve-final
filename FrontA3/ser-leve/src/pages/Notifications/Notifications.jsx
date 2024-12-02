@@ -22,6 +22,30 @@ const Notifications = () => {
       time: "1 dia atrás", 
       profileImage: "https://via.placeholder.com/50" 
     },
+    { 
+      id: 3, 
+      message: "Seu perfil foi atualizado com sucesso.", 
+      time: "1 dia atrás", 
+      profileImage: "https://via.placeholder.com/50" 
+    },
+    { 
+      id: 3, 
+      message: "Seu perfil foi atualizado com sucesso.", 
+      time: "1 dia atrás", 
+      profileImage: "https://via.placeholder.com/50" 
+    },
+    { 
+      id: 3, 
+      message: "Seu perfil foi atualizado com sucesso.", 
+      time: "1 dia atrás", 
+      profileImage: "https://via.placeholder.com/50" 
+    },
+    { 
+      id: 3, 
+      message: "Seu perfil foi atualizado com sucesso.", 
+      time: "1 dia atrás", 
+      profileImage: "https://via.placeholder.com/50" 
+    },  
   ];
 
   return (

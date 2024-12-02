@@ -6,8 +6,8 @@ export class NotificacaoController {
   constructor(private readonly repo: NotificacaoRepository) {}
 
   @Post('postou/:usuarioId/:postId')
-  async postou(@Param('usuarioId') usuarioId: string, @Param('postId') postId: number) {
-    await this.repo.postouNotificacao(+usuarioId, postId);
+  async postou(@Param('usuarioId') usuarioId: string, @Param('postId') postId: string) {
+    await this.repo.postouNotificacao(+usuarioId, +postId);
     return { message: 'Notification for post created successfully.' };
   }
 

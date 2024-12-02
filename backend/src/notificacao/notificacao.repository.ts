@@ -102,20 +102,22 @@ export class NotificacaoRepository {
   }
 
   // Helper function to get the latest notifications for the logged-in user
-  async getLatestNotifications(usuarioId: number, limit: number = 5) {
-    return this.prismaService.notificacao.findMany({
-      where: {
-        OR: [
-          { SendTo: usuarioId },
-          { SentBy: usuarioId },
-        ],
-      },
-      orderBy: {
-        Criado: 'desc',
-      },
-      take: limit,
-    });
-  }
+  // Helper function to get the latest notifications for the logged-in user
+async getLatestNotifications(usuarioId: number, limit: number = 7) {
+  return this.prismaService.notificacao.findMany({
+    where: {
+      OR: [
+        { SendTo: usuarioId },
+        { SentBy: usuarioId },
+      ],
+    },
+    orderBy: {
+      Criado: 'desc',
+    },
+    take: limit, // Retrieve up to the specified limit
+  });
+}
+
 
   // Delete all notifications sent to a specific user
   async deleteNotificationsSentTo(usuarioId: number): Promise<void> {
