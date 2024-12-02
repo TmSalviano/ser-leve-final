@@ -95,5 +95,9 @@ export class UsuarioController {
       return result;
     }
 
+    @Get('allreceitas')
+    async getAllReceitas() {
+        return this.repo.getAllUserIds();
+    }
 
 }

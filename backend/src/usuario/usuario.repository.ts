@@ -213,5 +213,22 @@ export class UsuarioRepository {
     }
       
       
+    async getAllUserIds() {
+        try {
+          const usuarios = await this.prismaService.usuario.findMany({
+            select: {
+              Id: true,  // Only fetch the Id field
+            },
+          });
+
+          if (!usuarios) {
+            return { success: false, message: 'User not found' };
+          }
+
+          return {success: true, usuarios: usuarios.map(usuario => usuario.Id)}; // Extract just the Ids from the result
+        } catch (error) {
+            return { success: false, message: 'Error Fetching User Ids' };// Return an empty array in case of an error
+        }
+      }
       
 }

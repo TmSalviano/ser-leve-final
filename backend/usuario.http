@@ -85,3 +85,5 @@ GET  http://localhost:3000/api/usuario/QuemSeguir/3?queryString=limao
 ###
 GET http://localhost:3000/api/usuario/profile-picture/3
 ###
+GET http://localhost:3000/api/usuario/allreceitas
+###

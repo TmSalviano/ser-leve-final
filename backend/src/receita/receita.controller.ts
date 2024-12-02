@@ -11,11 +11,6 @@ export class ReceitaController {
     return this.receitaRepo.createReceita(receitaData);
   }
 
-  @Get(':id')
-  async getReceitaById(@Param('id') id: string) {
-    return this.receitaRepo.getReceitaById(+id);
-  }
-
   @Get('usuario/:usuarioId')
   async getAllReceitasByUsuarioId(@Param('usuarioId') usuarioId: string) {
     return this.receitaRepo.getAllReceitasByUsuarioId(+usuarioId);
@@ -32,7 +27,7 @@ export class ReceitaController {
   @Delete(':id')
   async deleteReceitaById(@Param('id') id: string) {
     return this.receitaRepo.deleteReceitaById(+id);
-  }
+  } 
 
   @Post('main-feed')
   async getMainFeed(@Body() usuarioIds: number[]) {
