@@ -54,7 +54,7 @@ Tradicional regular webpages that posts recipes to it and people read it, learn 
 
 ### Individual Contributions
 - **Tiago Salviano**  
-  Entire backend, connecting the backend to the frontend, refactoring the frontend when necessary, and documentation.
+  Entire backend, refactoring the frontend when necessary, and documentation.
 
 - **Isadora**  
   Default + main frontend developer + leader of the architectural design of React components.
