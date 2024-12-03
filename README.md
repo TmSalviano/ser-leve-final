@@ -1,27 +1,45 @@
 # ser-leve-final
 A niche social media website focused on sharing recipes with your friends, following users, staying updated on their posts, and having fun sharing recipes with others.
 
-## Dependencies
-### Frontend
-- **Vite**: `npm install vite`
-- **React**
+## Requisitos De Projeto
+  ### Frontend
+  - **Vite**: `npm install vite`
+  - **React**
+  
+  ### Backend
+  - **npx**
+  - **NestJS**: `npm install -g @nestjs/cli`
+  - **Prisma**: `npx prisma generate`
 
-### Backend
-- **npx**
-- **NestJS**: `npm install -g @nestjs/cli`
-- **Prisma**: `npx prisma generate`
+  ### Other
+  - **Concurrently**: `npm install -g concurrently`
 
-### Other
-- **Concurrently**: `npm install -g concurrently`
-
-#### Linux
-Some npm packages might need to be installed to make the application compatible with Linux.
+  ### Linux
+  - Some npm packages might need to be installed to make the application compatible with Linux.
 
 ## Boot
 To start the project, simply run:  
 `npm run dev` at the root of the project.
 
 You will see both the backend and frontend initializing simultaneously. If there are errors, the messages will guide you to the missing technologies.
+
+## Analise de Similares
+Tradicional regular webpages that posts recipes to it and people read it, learn it and that is it. No human connection, very limited ability to personalize and make the webpages yours. This offers very little incentive for the user to do anything more thant just grab the recipe and never return, which is not a good environment for making money. Usually flooded with adds for the same reason cited previously.
+
+## Cenarios de Uso
+- Sharing recipes with your friends.
+- Discovering new recipes.
+- Self Improvement (become healthier)
+- Advertise Products (possible if you are popular)
+
+## Some but not All Personas
+- 15-35 year old men looking for recipes that fit with his rigid diet
+- 60-80 year old grandma who wants to share here culinary mastery to the world
+- 15-35 year old women looking to share their recipes with their friends and try out some new exotic dishes
+- 30-80 year olds looking to advertise their products on the website
+
+## Caixa Morfologica 
+- Feita e entregue no formato de uma planilha excel
 
 ## Contributors
 ### Default Responsibilities
